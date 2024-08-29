@@ -48,3 +48,5 @@ nmi:
   nop
   rti
 #+end_src
+* TODO [/]
+- [ ] [[info:Emacs#Compilation mode][info "(Emacs) Compilation mode"]]
