@@ -2,9 +2,10 @@
 #+PROPERTY: header-args+  :noweb tangle
 #+PROPERTY: header-args+  :exports code
 * IEEE754 in 6502 assembler
-First we need to set up the compilation command for the project.
+Export code with {C-c C-v t}
 
 ** .dir-locals.el
+Set up the compilation command for the project.
 #+begin_src elisp :tangle .dir-locals.el
 ;;; Directory Local Variables            -*- no-byte-compile: t -*-
 ;;; For more information see (info "(emacs) Directory Variables")
