@@ -20,6 +20,11 @@ Set up the boilerplate for [[file:c:/cc65/cfg/nes.cfg][target "NES"]] since I'm 
 for inspecting and debugging resulting binary.
 #+begin_src ca65 :tangle floating6502.s
 ;;; -*- mode:ca65; coding:utf-8 -*-
+.segment "ZEROPAGE"
+Length: .byte $00 ; Total length of the number in digital notation
+Integer: .byte $00 ; Length of integer part
+Decimal: .byte $00 ; Length of decimal fractional part
+
 .segment "HEADER"
   ; .byte "NES", $1A      ; iNES header identifier
   .byte $4E, $45, $53, $1A
@@ -51,17 +56,28 @@ Code lives here:
 #+begin_src ca65 :tangle floating6502.s
 reset:
   ldx #$0
+  ldy #$0
 load_int:
   lda Number, X
   beq zero_a
+  bit DDot
+  beq dot
   inx
+  iny
+  jmp load_int
+
+dot:
+  stx Integer
+  ldy $00
   jmp load_int
 
 zero_a:
-  txa ; length of decimal
+  stx Length ; length of decimal
+  sty Decimal
   nop
+  brk
 
 Number:
   .asciiz "3.14159"
-
+DDot: .byte $2E
 #+end_src
