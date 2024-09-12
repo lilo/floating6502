@@ -50,8 +50,16 @@ nmi:
 Code lives here:
 #+begin_src ca65 :tangle floating6502.s
 reset:
-  ldx Number
-  dex
+  ldx #$0
+load_int:
+  lda Number, X
+  beq zero_a
+  inx
+  jmp load_int
+
+zero_a:
+  txa ; length of decimal
+  nop
 
 Number:
   .asciiz "3.14159"
