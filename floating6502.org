@@ -59,8 +59,8 @@ reset:
   ldy #$0
 load_int:
   lda Number, X
-  beq zero_a
-  cmp DDot
+  beq zero_a ; End of string
+  cmp DecimalDot
   clc
   beq dot
   inx
@@ -81,6 +81,6 @@ zero_a:
 
 Number:
 ;  .asciiz "3.14159"
-  .asciiz "31.4159"
-DDot: .byte $2E
+  .asciiz "0.314159"
+DecimalDot: .byte $2E
 #+end_src
